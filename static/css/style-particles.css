@@ -1,0 +1,24 @@
+#particles-js{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  background-color: #0c0c0c;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+#page-wrapper {
+  width: 100%;
+  height: 100%;
+  float: left;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+}

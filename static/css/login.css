@@ -1,0 +1,105 @@
+/* Form */
+.SignForm {
+    width: 350px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #111;
+    text-align: center;
+    border-radius: 25px;
+}
+/* Inputs / Button */
+.loginInput, .loginSubmit, .loginInputFail {
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    outline: none;
+    color: #fff;
+    border-radius: 24px;
+    transition: 0.5s;
+}
+
+.loginInputFail {
+    font-size: 17px;
+    border: none;
+    background: #e74d3c88;
+    padding: 14px 10px;
+    width: 240px;
+}
+
+.loginInput {
+    font-size: 17px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 14px 10px;
+    width: 240px;
+}
+
+.loginSubmit {
+    font-size: 17px;
+    background: #0984e3;
+    border: none;
+    padding: 14px 40px;
+    width: 180px;
+}
+
+.loginInputFail:hover, .loginInputFail:focus {
+    background: #e74d3c70;
+}
+
+.loginInput:hover, .loginInput:focus {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.loginSubmit:hover {
+    background: #0062ff;
+}
+/* Warnings */
+.warningText {
+    position:absolute;
+    width: 350px;
+    margin-top: -23px;
+    left: 50%;
+    transform: translate(-50%);
+    color: #e74c3c;
+}
+
+.hidden {
+    visibility: hidden;
+}
+/* hint */
+.eyeOfDiscovery {
+    position: absolute;
+    border: none;
+    background: none;
+    display: block;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    right: 20px;
+    top: 190px;
+}
+
+#eye {
+    color: #fff;
+    font-size: 20px;
+}
+/* Text */
+.passwordLink {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.passwordLink:hover {
+    color: #0062ff;
+}
+
+.emailText {
+    color: #fff;
+    padding: 25px 30px;
+    font-size: 20px;
+}

@@ -1,0 +1,42 @@
+{{ template "header.html" .}}
+    <div class="information">
+        <div align="center"> 
+            <p class="headline">Archive</p>
+            <div class="archiveList">
+                <table class="archiveTable">
+                    <tr>
+                        <th class="cell buttons">Copy</th>
+                        <th class="cell id">Id</th>
+                        <th class="cell url">Url</th>
+                        <th class="cell visits">Visits</th>
+                        <th class="cell buttons">Delete</th>
+                    </tr>
+                    {{ range .archive }}
+                        <tr>
+                            <th class="cell">
+                                <button id="{{ .Id }}" class="copyButton" onclick="copy({{ .Id }})"><i class="fa fa-clone" aria-hidden="true"></i></button>
+                            </th>
+                            <th class="cell id"><div class="archiveId"><p class="linkText">{{ .Id }}</p></div></th>
+                            <th class="cell url"><div class="archiveUrl"><p class="linkText">{{ .Url }}</p></div></th>
+                            <th class="cell visits">{{ .Visits }}</th>
+                            <th class="cell">
+                                <form action="/archive" method="post">
+                                    <button class="deleteButton" name="delete" value="{{ .Id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </form>
+                            </th>
+                        </tr>
+                    {{ end }}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // copy url to clipboard
+        function copy(id) {
+            navigator.clipboard.writeText('https://{{ .url }}/' + id).then(() => {
+                document.querySelector('#' + id).innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+            });
+        };
+    </script>
+{{ template "footer.html" .}}

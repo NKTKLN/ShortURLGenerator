@@ -1,0 +1,67 @@
+{{ template "header.html" .}}
+    <div class="SignForm">
+        <h1 style="color: #fff;">Recreate</h1>
+        <form action="/reset/{{ .hash }}" method="post">
+            <p class="hidden" id="warningPass"><p> 
+            <input class="loginInput" id="passInput" type="password" name="password" autocomplete="off" placeholder="Password" required>
+            <p class="hidden" id="warningPassRep"><p> 
+            <input class="loginInput" id="passRepInput" type="password" name="passwordRep" autocomplete="off" placeholder="Repeat password" required>
+            <input class="loginSubmit" type="submit" value="Recreate" disabled>
+        </form>
+        <button class="eyeOfDiscovery" style="top: 123px;"><i id="eye" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+    </div>
+
+    <script>
+		var pass = document.querySelector('#passInput'),
+            repPass = document.querySelector('#passRepInput'),
+			button = document.querySelector('.loginSubmit'),
+            warningPass = document.querySelector('#warningPass'),
+            warningPassRep = document.querySelector('#warningPassRep'),
+            eyebutton = document.querySelector('.eyeOfDiscovery');
+
+        if (!{{ .correct }}) { 
+            button.disabled = true;
+            warningPassRep.setAttribute('class', 'warningText');
+            warningPassRep.textContent = 'Incorrect password!';
+            repPass.setAttribute('class', 'loginInputFail');
+        }
+
+        eyebutton.onclick = function() {
+            if (eyebutton.innerHTML == '<i id="eye" class="fa fa-eye" aria-hidden="true"></i>') {
+                eyebutton.innerHTML = '<i id="eye" class="fa fa-eye-slash" aria-hidden="true"></i>';
+                pass.setAttribute('type', 'password');
+            } else {
+                eyebutton.innerHTML = '<i id="eye" class="fa fa-eye" aria-hidden="true"></i>';
+                pass.setAttribute('type', 'text');
+            };
+        };
+
+        pass.onchange = function() {
+            if (pass.value.length >= 5 && pass.value.length <= 20) {
+                button.disabled = false;
+                warningPass.setAttribute('class', 'hidden');
+                warningPass.textContent = "";
+                pass.setAttribute('class', 'loginInput');
+            } else {
+                button.disabled = true;
+                warningPass.setAttribute('class', 'warningText');
+                warningPass.textContent = 'At least 5 and no more than 20 characters!';
+                pass.setAttribute('class', 'loginInputFail');
+            };
+		};
+
+        repPass.onchange = function() {
+            if (pass.value.length >= 5 && pass.value == repPass.value) {
+                button.disabled = false;
+                warningPassRep.setAttribute('class', 'hidden');
+                warningPassRep.textContent = '';
+                repPass.setAttribute('class', 'loginInput');
+            } else {
+                button.disabled = true;
+                warningPassRep.setAttribute('class', 'warningText');
+                warningPassRep.textContent = 'Incorrect password!';
+                repPass.setAttribute('class', 'loginInputFail');
+            };
+        };
+	</script>
+{{ template "footer.html" .}}

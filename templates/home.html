@@ -1,0 +1,20 @@
+{{ template "header.html" .}}
+    <div class="information">
+        <div align="center">
+            <p class="name">Short URL Generator</p>
+            <form class="Loginform" action="/" method="post">
+                <input class="UserInput" type="text" name="InputUrl" autocomplete="off" placeholder="URL" required>
+                <button class="NextBtn"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            </form>
+            <p id="warning" class="hidden">Invalid url!</p>
+            <p class="text" style="margin-top: 10px;">These days, forwarding links has become commonplace. But some links are too big and take up too much space in the message, so you can shorten them here. Just enter your link in the box above and click the arrow. Our site also has a <a href="https://t.me/{{ .bot }}" class="creatorLink">Telegram bot</a>. For the real geeks, there's <a href="/swagger/index.html" class="creatorLink">Api</a>.</p>
+            <p class="creator">2021 © | Created with ❤️ by <a href="https://nktkln.com" class="creatorLink" style="text-decoration: none;">NKTKLN</a></p>
+        </div>
+    </div>
+
+    <script>
+        if (!{{ .correct }}) {document.querySelector('#warning').setAttribute('class', 'InvalidLink');};
+    </script>
+
+{{ template "footer.html" .}}
+

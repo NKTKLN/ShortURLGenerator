@@ -1,0 +1,99 @@
+basePath: /api
+definitions:
+  others.Api:
+    properties:
+      type:
+        type: string
+    type: object
+  others.ApiUrl:
+    properties:
+      status:
+        type: string
+      url:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: nktkln@nktkln.com
+    name: API Support
+    url: https://nktkln.com
+  description: This api will help you control your links from outside the site
+  title: Short URL Generator API
+  version: "2.0"
+paths:
+  /add:
+    post:
+      consumes:
+      - application/json
+      description: Reference abbreviation
+      parameters:
+      - description: URL
+        in: query
+        name: url
+        type: string
+      - description: Email
+        in: query
+        name: email
+        type: string
+      - description: Password
+        in: query
+        name: password
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/others.ApiUrl'
+      summary: Add url
+  /archive:
+    get:
+      consumes:
+      - application/json
+      description: Reference abbreviation
+      parameters:
+      - description: Email
+        in: query
+        name: email
+        type: string
+      - description: Password
+        in: query
+        name: password
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/others.Api'
+      summary: Archive
+  /delete:
+    post:
+      consumes:
+      - application/json
+      description: Delete url from db
+      parameters:
+      - description: URL id
+        in: query
+        name: id
+        type: string
+      - description: Email
+        in: query
+        name: email
+        type: string
+      - description: Password
+        in: query
+        name: password
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/others.Api'
+      summary: Delete url
+swagger: "2.0"

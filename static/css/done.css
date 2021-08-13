@@ -1,0 +1,52 @@
+/* Icons */
+#check {
+    color: rgb(0, 255, 13);
+    font-size: 100px;
+}
+
+#fatal {
+    color: rgb(255, 0, 0);
+    font-size: 100px;
+}
+
+/* Copy text */
+.copyText {
+	height: 42px;
+    margin-bottom: 10px;
+    float:left; 
+}
+
+/* Copy button */
+.copyBtn {
+    width: 42px;
+	height: 42px;
+    float: right; 
+    font-size: 22px;
+}
+
+.copy {
+    display: inline-block;
+}
+
+/* Icons social */
+.socialIcons {
+    font-size: 25px;
+    color: #fff;
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: 0.5s;
+}
+
+.socialIcons:hover {
+    color: #0062ff;
+}
+
+/* Panic */
+.InvalidLink {
+    color: #fff; 
+    background: rgba(255, 0, 0, 0.4);
+    font-size: 23px; 
+    width: 200px; 
+    height: 35px; 
+    border-radius: 25px;
+}

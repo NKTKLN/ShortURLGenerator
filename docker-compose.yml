@@ -1,0 +1,79 @@
+version: '3'
+
+networks:
+  app-net:
+    driver: bridge
+  db-net:
+    driver: bridge
+
+services:
+  app:
+    restart: always
+    build: .
+    command: sh -c "/wait && ./main"
+    networks:
+      - app-net
+      - db-net
+    env_file:
+      - env/app.env
+  
+  bot:
+    restart: always
+    build: ./bot
+    command: sh -c "/wait && python main.py"
+    networks:
+      - db-net
+    volumes: 
+      - ./env/:/usr/src/app/env
+
+  pg:
+    restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+    networks:
+      - db-net
+    env_file:
+      - env/pg.env
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    restart: always
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - db-net
+
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: jwilder/nginx-proxy
+    networks:
+      - app-net
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  nginx-proxy-letsencrypt:
+    container_name: nginx-proxy-letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    networks:
+      - app-net
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+
+volumes:
+  certs:
+  vhost.d:
+  html:

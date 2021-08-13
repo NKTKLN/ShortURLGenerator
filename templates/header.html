@@ -1,0 +1,43 @@
+<!--header.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short URL Generator</title>
+    <link rel="shortcut icon" href="/static/images/icon.png" type="image/png">
+    <meta name="description" content="This service will help you shorten links.">
+    <meta name="author" content="NKTKLN"/>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="/static/css/done.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/archive.css">
+    <link rel="stylesheet" href="/static/css/redirect.css">
+    <link rel="stylesheet" href="/static/css/style-particles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body style="background: #0c0c0c;">
+    <div id="loader_bg" class="visible">
+		<div class="loader"></div>
+	</div>
+
+    <div id="particles-js" class="hidden"></div>
+    <div id="page-wrapper" class="hidden">
+        <div class="pageMenu" id="nav">
+            <section>
+                <ul>
+                    <li><a href="/" class="link"><i id="icons" class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+                    {{ if .cookie }}
+                        <li><a href="/archive" class="link"><i id="icons" class="fa fa-archive" aria-hidden="true"></i>Archive</a></li>
+                        <li><a href="/logout" class="link"><i id="icons" class="fa fa-user-times" aria-hidden="true"></i>Sign Out</a></li>                    
+                    {{ else }}
+                        <li><a href="/login" class="link"><i id="icons" class="fa fa-user-circle-o" aria-hidden="true"></i>Sign In</a></li>
+                        <li><a href="/register" class="link"><i id="icons" class="fa fa-user-plus" aria-hidden="true"></i>Sign Up</a></li>                    
+                    {{end}}
+                </ul>
+            </section>     
+        </div>
+        <div class="buttonMenu"><div id="toggle"></div></div>

@@ -1,0 +1,18 @@
+/* Input Url */
+.UserInput {
+	height: 55px;
+	margin-bottom: 20px;
+}
+
+/* Next button */
+.NextBtn {
+    display: inline-block;
+    width: 55px;
+	height: 55px;
+    font-size: 18px;
+}
+
+.LoginForm {
+    display: flex;
+    justify-content: center;
+}

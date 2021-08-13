@@ -1,0 +1,125 @@
+/* Scrollbar customization */
+::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0062ff;
+    border-radius: 5px;
+}
+
+.headline {
+    color: #fff;
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+    margin: 30px;
+}
+/* Table */
+.archiveList {
+    height: 450px;
+    background: rgb(56, 56, 56);
+    border: 3px solid #fff;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.archiveTable {
+    color: #fff;
+    border-spacing: 0;
+}
+
+.cell {
+    height: 50px;
+}
+
+.cell.buttons, .cell.url, .cell.id, .cell.visits  {
+    border-bottom: 2px solid #fff;
+}
+
+.cell.url, .cell.id, .cell.visits {
+    border-right: 2px solid #fff;
+}
+
+.archiveUrl {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+}
+
+.linkText {
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+/* Buttons */
+.copyButton, .deleteButton {
+    width: 42px;
+	height: 42px;
+    font-size: 22px;
+    border-radius: 21px;
+    cursor: pointer;
+}
+
+.copyButton {
+    background: #0984e3;
+}
+
+.deleteButton {
+    background: #e74c3c;
+}
+
+.deleteButton:hover {
+    background: #c0392b;
+}
+
+@media screen and (max-width: 600px) {
+    .archiveList {
+        width: 350px;
+    }
+
+    .cell {
+        width: 60px;
+    }
+
+    .cell.id {
+        width: 70px;
+        border-left: 2px solid #fff;
+    }
+    
+    .cell.url, .archiveUrl {
+        width: 100px;
+    }
+
+    .archiveId {
+        width: 70px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        overflow-x: scroll;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    .archiveList {
+        width: 500px;
+    }
+
+    .cell {
+        width: 80px;
+    }
+
+    .cell.id {
+        width: 120px;
+        border-left: 2px solid #fff;
+    }
+    
+    .cell.url, .archiveUrl {
+        width: 140px;
+    }   
+}

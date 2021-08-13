@@ -1,0 +1,30 @@
+{{ template "header.html" .}}
+    <div class="information">
+        <div align="center">
+            <i id="check" class="fa fa-check-circle-o" aria-hidden="true"></i>
+            <p class="text" style="margin-bottom: 35px; font-size: 25px;">The link was generated successfully.</p>
+            <div class="copy">
+                <input class="copyText" spellcheck="false" readonly="readonly" value="{{ .url }}">
+                <button class="copyBtn"><i class="fa fa-clone" aria-hidden="true"></i></button> 
+            </div>
+            <p class="text"  style="margin-top: 15px; font-size: 20px;">The link is saved in the database. Now you can send it to your friends. To copy this link, click on the icon next to it or click on the social network icons below to send it to your friends.</p>
+            <p class="text" style="margin-top: 15px; font-size: 22px;">Share the link with your friends.</p>
+            <div>
+                <a href="https://t.me/share/url?url={{ .url }}&utm_source=share2" class="socialIcons"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+                <a href="https://www.facebook.com/sharer.php?src=sp&u={{ .url }}&utm_source=share2" class="socialIcons"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                <a href="https://vk.com/share.php?url={{ .url }}&utm_source=share2 " class="socialIcons"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/intent/tweet?url={{ .url }}&utm_source=share2" class="socialIcons"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+            <p class="creator">2021 © | Created with ❤️ by <a href="https://nktkln.com" class="creatorLink" style="text-decoration: none;">NKTKLN</a></p>
+        </div>
+    </div> 
+
+    <script>
+        // copy url to clipboard
+        var button = document.querySelector('.copyBtn');
+        button.onclick = function() {
+            var copyText = document.querySelector('.copyText');
+            navigator.clipboard.writeText(copyText.value).then(() => {button.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';});
+        };
+    </script>
+{{ template "footer.html" .}}

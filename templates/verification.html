@@ -1,0 +1,20 @@
+{{ template "header.html" .}}
+    <div class="SignForm" style="padding: 30px;">
+        <i id="icon" class="" aria-hidden="true"></i>
+        <p class="emailText"></p>
+    </div>
+    <script>
+        var icon = document.querySelector('#icon'),
+            text = document.querySelector('.emailText');
+        
+        if ({{ . }}) {
+            icon.setAttribute('id', 'check');
+            icon.setAttribute('class', 'fa fa-check-circle-o');
+            text.textContent = 'Your mail is confirmed. Now you can use all the functions of the site.';
+        } else {
+            icon.setAttribute('id', 'fatal');
+            icon.setAttribute('class', 'fa fa-times-circle-o');
+            text.textContent = 'Time has expired, your hash is not valid.';
+        };
+    </script>
+{{ template "footer.html" .}}

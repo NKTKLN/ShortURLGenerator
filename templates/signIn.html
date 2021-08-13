@@ -1,0 +1,63 @@
+{{ template "header.html" .}}
+    <div class="SignForm">
+        <h1 style="color: #fff;">Sign in</h1>
+        <form action="/{{ .postUrl }}" method="post">
+            <p class="hidden" id="warningEmail"><p> 
+            <input class="loginInput" id="emailInput" type="text" name="email" autocomplete="off" placeholder="Email" required>
+            <input class="loginInput" id="passInput" type="password" name="password" autocomplete="off" placeholder="Password" required>
+            <input class="loginSubmit" type="submit" value="Sign in" disabled>
+        </form>
+        <button class="eyeOfDiscovery"><i id="eye" class="fa fa-eye-slash" aria-hidden="true"></i></button>
+        <a class="passwordLink" href="/reset">Retrieve the password.</a>
+    </div>
+
+    <script>
+		var pass = document.querySelector('#passInput'),
+            button = document.querySelector('.loginSubmit'),
+            email = document.querySelector('#emailInput'),
+            warningEmail = document.querySelector('#warningEmail'),
+            eyebutton = document.querySelector('.eyeOfDiscovery');
+
+        if (!{{ .correct }}) {
+            button.disabled = true;
+            warningEmail.setAttribute('class', 'warningText');
+            warningEmail.textContent = 'Wrong email or password!';
+            pass.setAttribute('class', 'loginInputFail');
+            email.setAttribute('class', 'loginInputFail');
+        }
+        
+        eyebutton.onclick = function() {
+            if (eyebutton.innerHTML == '<i id="eye" class="fa fa-eye" aria-hidden="true"></i>') {
+                eyebutton.innerHTML = '<i id="eye" class="fa fa-eye-slash" aria-hidden="true"></i>';
+                pass.setAttribute('type', 'password');
+            } else {
+                eyebutton.innerHTML = '<i id="eye" class="fa fa-eye" aria-hidden="true"></i>';
+                pass.setAttribute('type', 'text');
+            };
+        };
+
+        pass.onchange = function() {
+            if (pass.value.length >= 5) {
+                button.disabled = false;
+                pass.setAttribute('class', 'loginInput');
+            } else {
+                button.disabled = true;
+                pass.setAttribute('class', 'loginInputFail');
+            };
+		};
+
+        email.onchange = function() {
+            if (email.value.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) != null) {
+                button.disabled = false;
+                warningEmail.setAttribute('class', 'hidden');
+                warningEmail.textContent = "";
+                email.setAttribute('class', 'loginInput');
+            } else {
+                button.disabled = true;
+                warningEmail.setAttribute('class', 'warningText');
+                warningEmail.textContent = 'Example: ab@abc.xyz';
+                email.setAttribute('class', 'loginInputFail');
+            };
+        };
+	</script>
+{{ template "footer.html" .}}
