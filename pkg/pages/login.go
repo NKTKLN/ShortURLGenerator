@@ -24,7 +24,7 @@ func Login(c *gin.Context) {
 		idDb := pg.GetInformationFromDB("id", fmt.Sprintf("email='%s'", c.Request.PostForm["email"][0]), "users")
 		hashId := others.Encoding(idDb)
 		pg.ExecFromDB(fmt.Sprintf("UPDATE users SET cookieId='%s' WHERE id='%s';", hashId, idDb))
-		user.AddCookie(hashId, 0, c)
+		user.AddCookie(hashId, 60*60*24*365, c)
 		c.Redirect(http.StatusFound, "/")
 	} else {
 		c.HTML(http.StatusOK, "signIn.html", gin.H{"correct": false, "cookie": user.CheckCookie(c), "postUrl": "login"})
@@ -101,7 +101,7 @@ func VerificationLogin(c *gin.Context) {
 		json.Unmarshal([]byte(val), &userParam)
 		if pg.GetInformationFromDB("password", fmt.Sprintf("email='%s'", userParam.Email), "users") == "" {
 			hashId := pg.GenerateUserId(userParam.Email, userParam.Password)
-			user.AddCookie(hashId, 0, c)
+			user.AddCookie(hashId, 60*60*24*365, c)
 		}
 		c.HTML(http.StatusOK, "verification.html", gin.H{"correct": true, "cookie": true})	
 	}
