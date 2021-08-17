@@ -35,7 +35,7 @@
         // copy url to clipboard
         function copy(id) {
             navigator.clipboard.writeText('https://{{ .url }}/' + id).then(() => {
-                document.querySelector('#id' + id).innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+                document.querySelector('#id-' + id).innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
             });
         };
     </script>
