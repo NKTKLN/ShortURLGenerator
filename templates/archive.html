@@ -14,7 +14,7 @@
                     {{ range .archive }}
                         <tr>
                             <th class="cell">
-                                <button id="{{ .Id }}" class="copyButton" onclick="copy({{ .Id }})"><i class="fa fa-clone" aria-hidden="true"></i></button>
+                                <button id="id-{{ .Id }}" class="copyButton" onclick="copy({{ .Id }})"><i class="fa fa-clone" aria-hidden="true"></i></button>
                             </th>
                             <th class="cell id"><div class="archiveId"><p class="linkText">{{ .Id }}</p></div></th>
                             <th class="cell url"><div class="archiveUrl"><p class="linkText">{{ .Url }}</p></div></th>
@@ -35,7 +35,7 @@
         // copy url to clipboard
         function copy(id) {
             navigator.clipboard.writeText('https://{{ .url }}/' + id).then(() => {
-                document.querySelector('#' + id).innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+                document.querySelector('#id' + id).innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
             });
         };
     </script>
