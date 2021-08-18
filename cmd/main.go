@@ -17,7 +17,7 @@ import (
 // @contact.url https://nktkln.com
 // @contact.email nktkln@nktkln.com
 
-// @host localhost:8080
+// @host localhost:80
 // @BasePath /api
 func main() {
 	r := gin.Default()
