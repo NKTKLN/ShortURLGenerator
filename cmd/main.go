@@ -48,5 +48,5 @@ func main() {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
     r.GET("/:id", pages.Redirect)
 	// Running the site on port 80
-	r.Run(":8080")
+	r.Run(":80")
 }
