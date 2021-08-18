@@ -12,7 +12,6 @@ definitions:
       url:
         type: string
     type: object
-host: localhost:80
 info:
   contact:
     email: nktkln@nktkln.com

@@ -10,7 +10,6 @@
         },
         "version": "2.0"
     },
-    "host": "localhost:80",
     "basePath": "/api",
     "paths": {
         "/add": {
