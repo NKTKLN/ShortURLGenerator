@@ -20,7 +20,7 @@ services:
   bot:
     restart: always
     build: ./bot
-    command: sh -c "/wait && python main.py"
+    command: sh -c "/wait && python app.py"
     networks:
       - db-net
     volumes: 
@@ -46,32 +46,32 @@ services:
     networks:
       - db-net
 
-  nginx-proxy:
-    container_name: nginx-proxy
-    image: jwilder/nginx-proxy
-    networks:
-      - app-net
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - certs:/etc/nginx/certs
-      - vhost.d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+  # nginx-proxy:
+  #   container_name: nginx-proxy
+  #   image: jwilder/nginx-proxy
+  #   networks:
+  #     - app-net
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - certs:/etc/nginx/certs
+  #     - vhost.d:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
 
-  nginx-proxy-letsencrypt:
-    container_name: nginx-proxy-letsencrypt
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    networks:
-      - app-net
-    volumes:
-      - certs:/etc/nginx/certs
-      - vhost.d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      - NGINX_PROXY_CONTAINER=nginx-proxy
+  # nginx-proxy-letsencrypt:
+  #   container_name: nginx-proxy-letsencrypt
+  #   image: jrcs/letsencrypt-nginx-proxy-companion
+  #   networks:
+  #     - app-net
+  #   volumes:
+  #     - certs:/etc/nginx/certs
+  #     - vhost.d:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   environment:
+  #     - NGINX_PROXY_CONTAINER=nginx-proxy
 
 volumes:
   certs:

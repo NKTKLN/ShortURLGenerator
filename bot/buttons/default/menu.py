@@ -1,7 +1,7 @@
-from pg import *
 from aiogram import types
 from aiogram.types import *
 from dotenv import load_dotenv
+from database.postgres import *
 # Buttons for the logged user
 keyboardLogged = types.ReplyKeyboardMarkup(resize_keyboard=True)
 keyboardLogged.add(types.KeyboardButton(text='🗄 Archive'))
