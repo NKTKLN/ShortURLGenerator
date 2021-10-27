@@ -20,7 +20,8 @@ func AddCookie(id string, time int, c *gin.Context) {
 
 func CheckCookie(c *gin.Context) bool {
 	cookieId, err := c.Cookie("id")
-	return err == nil && pg.GetInformationFromDBI("id", fmt.Sprintf("cookieId='%s'", cookieId), "users") != 0 
+	userId := pg.GetInformationFromDBI("id", fmt.Sprintf("cookieId='%s'", cookieId), "users")
+	return err == nil && userId != 0 
 }
 
 func GetUserIdFromCookie(c *gin.Context) (userId int) {

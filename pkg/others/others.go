@@ -2,7 +2,9 @@ package others
 
 import (
 	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -42,4 +44,9 @@ func Encoding(text string) string {
     bytes, err := bcrypt.GenerateFromPassword([]byte(text), 5)
 	ErrorChecking(err)
     return string(bytes)
+}
+
+func GetInfromationFromEnv(file, name string) string {
+    ErrorChecking(godotenv.Load(file))
+	return os.Getenv(name)
 }

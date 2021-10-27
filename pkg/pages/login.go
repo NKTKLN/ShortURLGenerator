@@ -99,7 +99,7 @@ func VerificationLogin(c *gin.Context) {
 		// Adding a new user to the database and generating a cookie for it
 		var userParam others.UserReg
 		json.Unmarshal([]byte(val), &userParam)
-		if pg.GetInformationFromDB("password", fmt.Sprintf("email='%s'", userParam.Email), "users") == "" {
+		if password := pg.GetInformationFromDB("password", fmt.Sprintf("email='%s'", userParam.Email), "users"); password == "" {
 			hashId := pg.GenerateUserId(userParam.Email, userParam.Password)
 			user.AddCookie(hashId, 60*60*24*365, c)
 		}

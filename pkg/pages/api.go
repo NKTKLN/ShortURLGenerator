@@ -3,12 +3,10 @@ package pages
 import (
 	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/NKTKLN/ShortURLGenerator/pkg/others"
 	"github.com/NKTKLN/ShortURLGenerator/pkg/pg"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 // @Summary Add url
@@ -29,14 +27,12 @@ func ApiAdd(c *gin.Context) {
 			// Adding a link with user data to the database through the api
 			idDb := pg.GetInformationFromDBI("id", fmt.Sprintf("email='%s'", c.Query("email")), "users")
 			link := pg.UrlIdGenerator(c.Query("url"), idDb)
-			others.ErrorChecking(godotenv.Load("env/app.env"))
-			url := fmt.Sprintf("https://%s/%s", os.Getenv("VIRTUAL_HOST"), link)
+			url := fmt.Sprintf("https://%s/%s", others.GetInfromationFromEnv("env/app.env", "VIRTUAL_HOST"), link)
 			c.JSON(http.StatusOK, others.ApiUrl{Status: "Good.", Url: url})
 		} else if c.Query("email") == "" && c.Query("password") == "" {
 			// adding a link to the database through the api
 			link := pg.UrlIdGenerator(c.Query("url"), 0)
-			others.ErrorChecking(godotenv.Load("env/app.env"))
-			url := fmt.Sprintf("https://%s/%s", os.Getenv("VIRTUAL_HOST"), link)
+			url := fmt.Sprintf("https://%s/%s", others.GetInfromationFromEnv("env/app.env", "VIRTUAL_HOST"), link)
 			c.JSON(http.StatusOK, others.ApiUrl{Status: "Good.", Url: url})
 		} else {
 			c.JSON(http.StatusOK, others.ApiUrl{Status: "Error! Incorrect data."})

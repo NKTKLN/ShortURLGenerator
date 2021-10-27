@@ -4,10 +4,8 @@ import (
 	"fmt"
 	"net/mail"
 	"net/smtp"
-	"os"
 
 	"github.com/NKTKLN/ShortURLGenerator/pkg/others"
-	"github.com/joho/godotenv"
 	"github.com/scorredoira/email"
 )
 
@@ -84,23 +82,19 @@ func EmailSend(recipientEmail, hash, text string) {
 	// Obtaining tedious information to send a message
 	var emailText, site string
 	if text == "verification" {
-		others.ErrorChecking(godotenv.Load("env/app.env"))
-		site = os.Getenv("VIRTUAL_HOST")
+		site = others.GetInfromationFromEnv("env/app.env", "VIRTUAL_HOST")
 		emailText = htmlEmailVerification
 	} else if text == "reset" {
-		others.ErrorChecking(godotenv.Load("env/app.env"))
-		site = os.Getenv("VIRTUAL_HOST")
+		site = others.GetInfromationFromEnv("env/app.env", "VIRTUAL_HOST")
 		emailText = htmlEmailReset
 	} else if text == "telegram" {
-		others.ErrorChecking(godotenv.Load("env/bot.env"))
-		site = os.Getenv("BOT_USERNAME")
+		site = others.GetInfromationFromEnv("env/bot.env", "BOT_USERNAME")
 		emailText = htmlEmailTelegram
 	} 
-	others.ErrorChecking(godotenv.Load("env/email.env"))
 	senderEmail, password, smtpAddres := 
-		os.Getenv("SENDER_EMAIL"),
-		os.Getenv("EMAIL_PASSWORD"),
-		os.Getenv("SMTP_ADDRESS")
+		others.GetInfromationFromEnv("env/email.env", "SENDER_EMAIL"),
+		others.GetInfromationFromEnv("env/email.env", "EMAIL_PASSWORD"),
+		others.GetInfromationFromEnv("env/email.env", "SMTP_ADDRESS")
 	// Login and sending a message to the mail
 	m := email.NewHTMLMessage("Login confirmation ", fmt.Sprintf(emailText, site, hash))
 	m.From = mail.Address{Name: "ShortURLGenerator", Address: senderEmail}
